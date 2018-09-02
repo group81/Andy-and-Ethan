@@ -55,30 +55,30 @@ void rectangular::draw() {
 	glVertex3f(-xx / 2, 0, zz / 2);			//C
 	glVertex3f(xx / 2, 0, zz / 2);			//D
 	//face EFHG
-	glVertex3f(xx / 2, yy/2, -zz / 2);		//E
-	glVertex3f(-xx / 2, yy/2, -zz / 2);		//F
-	glVertex3f(-xx / 2, yy/2, zz / 2);		//G
-	glVertex3f(xx / 2, yy/2, zz / 2);		//H
+	glVertex3f(xx / 2, yy, -zz / 2);		//E
+	glVertex3f(-xx / 2, yy, -zz / 2);		//F
+	glVertex3f(-xx / 2, yy, zz / 2);		//G
+	glVertex3f(xx / 2, yy, zz / 2);			//H
 	//face ABFE
 	glVertex3f(xx / 2, 0, -zz / 2);			//A
 	glVertex3f(-xx / 2, 0, -zz / 2);		//B
-	glVertex3f(-xx / 2, yy / 2, -zz / 2);	//F
-	glVertex3f(xx / 2, yy / 2, -zz / 2);	//E
+	glVertex3f(-xx / 2, yy, -zz / 2);		//F
+	glVertex3f(xx / 2, yy, -zz / 2);		//E
 	//BCGF
 	glVertex3f(-xx / 2, 0, -zz / 2);		//B
 	glVertex3f(-xx / 2, 0, zz / 2);			//C
-	glVertex3f(-xx / 2, yy / 2, zz / 2);	//G
-	glVertex3f(-xx / 2, yy / 2, -zz / 2);	//F
+	glVertex3f(-xx / 2, yy, zz / 2);		//G
+	glVertex3f(-xx / 2, yy, -zz / 2);		//F
 	//CDHG
 	glVertex3f(-xx / 2, 0, zz / 2);			//C
 	glVertex3f(xx / 2, 0, zz / 2);			//D
-	glVertex3f(xx / 2, yy / 2, zz / 2);		//H
-	glVertex3f(-xx / 2, yy / 2, zz / 2);	//G
+	glVertex3f(xx / 2, yy, zz / 2);			//H
+	glVertex3f(-xx / 2, yy, zz / 2);		//G
 	//DAEH
 	glVertex3f(xx / 2, 0, zz / 2);			//D
 	glVertex3f(xx / 2, 0, -zz / 2);			//A
-	glVertex3f(xx / 2, yy / 2, -zz / 2);	//E
-	glVertex3f(xx / 2, yy / 2, zz / 2);		//H
+	glVertex3f(xx / 2, yy, -zz / 2);		//E
+	glVertex3f(xx / 2, yy, zz / 2);			//H
 	glEnd();
 
 }
