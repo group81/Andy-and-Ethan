@@ -42,9 +42,9 @@
 rectangular::rectangular(){}
 
 rectangular::rectangular(double x, double y, double z) {
-	xx = x;
-	yy = y;
-	zz = z;
+	this->xx = x;
+	this->yy = y;
+	this->zz = z;
 }
 
 void rectangular::draw() {

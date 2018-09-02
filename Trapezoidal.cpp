@@ -43,11 +43,11 @@
 trapezoidal::trapezoidal() {}
 trapezoidal::trapezoidal(double aLength, double bLength, double height, double depth, double offset) 
 {
-	a = aLength;
-	b = bLength;
-	h = height;
-	d = depth;
-	o = offset;
+	this->a = aLength;
+	this->b = bLength;
+	this->h = height;
+	this->d = depth;
+	this->o = offset;
 }
 
 void trapezoidal::draw()
