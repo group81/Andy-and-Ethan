@@ -1,4 +1,3 @@
-#include "Cylinder.h"
 #include <iostream>
 #include <cstdlib>
 #include <cstdio>
@@ -38,6 +37,8 @@
 #include "Messages.hpp"
 #include "HUD.hpp"
 #include "ObstacleManager.hpp"
+#include "Cylinder.h"
+
 
 cylinder::cylinder() {}
 
@@ -53,7 +54,7 @@ void cylinder::draw()
 
 	GLUquadric * quads = gluNewQuadric();
 
-	glTranslated(0, 0, -d / 2);
+	glTranslated(0, r , -d / 2);
 	gluCylinder(quads, r, r, d, 15, 1);
 	gluDisk(quads, 0, r, 15, 1);
 

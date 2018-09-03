@@ -54,7 +54,7 @@ void myVehicle::draw()
 	glColor3f(0, 1, 0);
 	rec.draw();
 
-	glTranslated(4, -1, 4.5);
+	glTranslated(4, -3, 4.5);
 	cylinder cyl1(2.5, 1);
 	glColor3f(0, 0, 1);
 	cyl1.draw();
@@ -74,7 +74,7 @@ void myVehicle::draw()
 	glColor3f(0, 0, 1);
 	cyl4.draw();
 
-	glTranslated(1.5, 3, -4.5);
+	glTranslated(1.5, 5, -4.5);
 	rectangular rec2(10, 5, 8);
 	glColor3f(1, 1, 1);
 	rec2.draw();

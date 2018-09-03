@@ -51,35 +51,38 @@ triangular::triangular(double aLength, double bLength, double depth, double thet
 
 void triangular::draw()
 {
+	glPushMatrix();
+
 	glBegin(GL_QUADS);
 	//face ABCD
 	glVertex3f(a / 2, 0, -d / 2);						//A
 	glVertex3f(-a / 2, 0, -d / 2);						//B
 	glVertex3f(-a / 2, 0, d / 2);						//C
 	glVertex3f(a / 2, 0, d / 2);						//D
-	//face BCEF
+														//face BCEF
 	glVertex3f(-a / 2, 0, -d / 2);						//B
 	glVertex3f(-a / 2, 0, d / 2);						//C
 	glVertex3f(a / 2 - b * cos(t), b * sin(t), d / 2);	//E
 	glVertex3f(a / 2 - b * cos(t), b * sin(t), -d / 2);	//F
-	//face ADEF
+														//face ADEF
 	glVertex3f(a / 2, 0, -d / 2);						//A
 	glVertex3f(a / 2, 0, d / 2);						//D
 	glVertex3f(a / 2 - b * cos(t), b * sin(t), d / 2);	//E
 	glVertex3f(a / 2 - b * cos(t), b * sin(t), -d / 2);	//F
 
 	glEnd();
-	
+
 	glBegin(GL_TRIANGLES);
 	//face ABF
 	glVertex3f(a / 2, 0, -d / 2);						//A
 	glVertex3f(-a / 2, 0, -d / 2);						//B
 	glVertex3f(a / 2 - b * cos(t), b * sin(t), -d / 2);	//F
-	//face CDE
+														//face CDE
 	glVertex3f(-a / 2, 0, d / 2);						//C
 	glVertex3f(a / 2, 0, d / 2);						//D
 	glVertex3f(a / 2 - b * cos(t), b * sin(t), d / 2);	//E
 
 	glEnd();
-	
+
+	glPopMatrix();
 }
