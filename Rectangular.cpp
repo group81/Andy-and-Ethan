@@ -41,13 +41,24 @@
 
 rectangular::rectangular(){}
 
-rectangular::rectangular(double x, double y, double z) {
+rectangular::rectangular(double x, double y, double z, double red, double green, double blue, double xPosition, double yPosition, double zPosition) {
 	this->xx = x;
 	this->yy = y;
 	this->zz = z;
+	this->r = red;
+	this->g = green;
+	this->b = blue;
+	this->xP = xPosition;
+	this->yP = yPosition;
+	this->zP = zPosition;
 }
 
 void rectangular::draw() {
+
+	glPushMatrix();
+	glTranslated(xP, yP, zP);
+	glColor3f(r, g, b);
+
 	glBegin(GL_QUADS);
 	//face ABCD
 	glVertex3f(xx / 2, 0, -zz / 2);			//A
@@ -80,5 +91,7 @@ void rectangular::draw() {
 	glVertex3f(xx / 2, yy, -zz / 2);		//E
 	glVertex3f(xx / 2, yy, zz / 2);			//H
 	glEnd();
+
+	glPopMatrix();
 
 }

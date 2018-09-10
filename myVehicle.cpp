@@ -45,48 +45,61 @@
 
 
 
-myVehicle::myVehicle(){}
+myVehicle::myVehicle()
+{
+	//implement the how to convert local vehicle into structure for uploading to the server
+}
+
+myVehicle::myVehicle(VehicleModel remote)
+{
+	//How to convert the remote vehicle downloading from the server
+}
+
 
 void myVehicle::draw()
 {
-	glTranslated(0, 3, 0);
-	rectangular rec(15, 2, 8);
-	glColor3f(0, 1, 0);
-	rec.draw();
+	//Draw local and remote car
+}
 
-	glTranslated(4, -3, 4.5);
-	cylinder cyl1(2.5, 1);
-	glColor3f(0, 0, 1);
-	cyl1.draw();
+void myVehicle::myVehicleModel()
+{
 
-	glTranslated(0, 0, -9);
-	cylinder cyl2(2.5, 1);
-	glColor3f(0, 0, 1);
-	cyl2.draw();
+	ShapeInit c6;
+	c6.xyz[0] = 0;
+	c6.xyz[1] = 0;
+	c6.xyz[2] = 0;
+	c6.rgb[0] = 1;
+	c6.rgb[1] = 0;
+	c6.rgb[2] = 0;
+	c6.params.cyl.depth = 3;
+	c6.params.cyl.radius = 4;
+	c6.params.cyl.isRolling = 1;
+	c6.params.cyl.isSteering = 1;
+	c6.type = CYLINDER;
+	c6.rotation = 0;
+	local.shapes.push_back(c6);
+	
+	ShapeInit tra;
+	tra.xyz[0] = 0;
+	tra.xyz[1] = 6;
+	tra.xyz[2] = 0;
+	tra.rgb[0] = 0;
+	tra.rgb[1] = 1;
+	tra.rgb[2] = 0;
+	tra.params.trap.alen = 10;
+	tra.params.trap.blen = 8;
+	tra.params.trap.aoff = 1;
+	tra.params.trap.depth = 5;
+	tra.params.trap.height = 5;
+	tra.type = TRAPEZOIDAL_PRISM;
+	tra.rotation = 0;
+	local.shapes.push_back(tra);
 
-	glTranslated(-8, 0, 0);
-	cylinder cyl3(2.5, 1);
-	glColor3f(0, 0, 1);
-	cyl2.draw();
 
-	glTranslated(0, 0, 9);
-	cylinder cyl4(2.5, 1);
-	glColor3f(0, 0, 1);
-	cyl4.draw();
 
-	glTranslated(1.5, 5, -4.5);
-	rectangular rec2(10, 5, 8);
-	glColor3f(1, 1, 1);
-	rec2.draw();
+}
 
-	glTranslated(7.5, 0, 0);
-	triangular tri(5, 7.071, 8, 0.7854);
-	glColor3f(1, 0, 1);
-	tri.draw();
-
-	glTranslated(-5, 5, 0);
-	trapezoidal tra(3, 1, 1, 5, 1);
-	glColor3f(1, 1, 0);
-	tra.draw();
-
+VehicleModel myVehicle::setLocal()
+{
+	return local;
 }

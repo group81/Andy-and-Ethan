@@ -4,9 +4,9 @@
 class triangular : public Shape
 {
 private:
-	double a, b, d, t;
+	double a, b, d, t, r, g, bb, xP, yP, zP;
 public:
 	triangular();
-	triangular(double aLength, double bLength, double depth, double theta);
+	triangular(double aLength, double bLength, double depth, double theta, double red, double green, double blue, double xPosition, double yPosition, double zPosition);
 	void draw();
 };

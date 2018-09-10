@@ -1,57 +1,39 @@
-#include "Triangular.h"
 #include <iostream>
 #include <cstdlib>
 #include <cstdio>
 #include <cstring>
 #include <sstream>
 #include <map>
-
-#ifdef __APPLE__
-#include <OpenGL/gl.h>
-#include <OpenGL/glu.h>
-#include <GLUT/glut.h>
-#include <unistd.h>
-#include <sys/time.h>
-#elif defined(WIN32)
 #include <Windows.h>
 #include <tchar.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
-#else
-#include <GL/gl.h>
-#include <GL/glu.h>
-#include <GL/glut.h>
-#include <unistd.h>
-#include <sys/time.h>
-#endif
-
-
-#include "Camera.hpp"
-#include "Ground.hpp"
-#include "KeyManager.hpp"
-
 #include "Shape.hpp"
 #include "Vehicle.hpp"
-
-#include "RemoteDataManager.hpp"
-#include "Messages.hpp"
-#include "HUD.hpp"
-#include "ObstacleManager.hpp"
+#include "Triangular.h"
 
 triangular::triangular(){}
 
-triangular::triangular(double aLength, double bLength, double depth, double theta)
+triangular::triangular(double aLength, double bLength, double depth, double theta, double red, double green, double blue, double xPosition, double yPosition, double zPosition)
 {
 	this->a = aLength;
 	this->b = bLength;
 	this->d = depth;
-	this->t = theta;
+	this->t = theta*3.1415926/180;
+	this->r = red;
+	this->g = green;
+	this->bb = blue;
+	this->xP = xPosition;
+	this->yP = yPosition;
+	this->zP = zPosition;
 }
 
 void triangular::draw()
 {
 	glPushMatrix();
+	glTranslated(xP, yP, zP);
+	glColor3f(r, g, bb);
 
 	glBegin(GL_QUADS);
 	//face ABCD

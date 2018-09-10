@@ -42,24 +42,37 @@
 
 cylinder::cylinder() {}
 
-cylinder::cylinder(double radius, double depth)
+cylinder::cylinder(double radius, double depth, bool isSteeling, bool isRolling, double red, double green, double blue, double xPosition, double yPosition, double zPosition)
 {
 	this->r = radius;
 	this->d = depth;
+	this->steel = isSteeling;
+	this->roll = isRolling;
+	this->rr = red;
+	this->g = green;
+	this->bb = blue;
+	this->xP = xPosition;
+	this->yP = yPosition;
+	this->zP = zPosition;
 }
 
 void cylinder::draw()
 {
-	glPushMatrix();
-
 	GLUquadric * quads = gluNewQuadric();
 
+	glPushMatrix();
+
+	glTranslated(xP, yP, zP);
+	glColor3f(rr, g, bb);
+	glRotated(-rt, 0, 1, 0);
+
 	glTranslated(0, r , -d / 2);
-	gluCylinder(quads, r, r, d, 15, 1);
-	gluDisk(quads, 0, r, 15, 1);
+
+	gluCylinder(quads, r, r, d, 6, 1);
+	gluDisk(quads, 0, r, 6, 1);
 
 	glTranslated(0, 0, d);
-	gluDisk(quads, 0, r, 15, 1);
+	gluDisk(quads, 0, r, 6, 1);
 
 	glPopMatrix();
 }

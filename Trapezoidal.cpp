@@ -41,47 +41,59 @@
 #include "ObstacleManager.hpp"
 
 trapezoidal::trapezoidal() {}
-trapezoidal::trapezoidal(double aLength, double bLength, double height, double depth, double offset) 
+trapezoidal::trapezoidal(double aLength, double bLength, double height, double depth, double offset, double red, double green, double blue, double xPosition, double yPosition, double zPosition)
 {
 	this->a = aLength;
 	this->b = bLength;
 	this->h = height;
 	this->d = depth;
 	this->o = offset;
+	this->r = red;
+	this->g = green;
+	this->bb = blue;
+	this->xP = xPosition;
+	this->yP = yPosition;
+	this->zP = zPosition;
 }
 
 void trapezoidal::draw()
 {
+	glPushMatrix();
+	glTranslated(xP, yP, zP);
+	glColor3f(r, g, bb);
+
 	glBegin(GL_QUADS);
 	//face ABCD
-	glVertex3f(a / 2, 0, -d / 2);			//A
-	glVertex3f(-a / 2, 0, -d / 2);			//B
-	glVertex3f(-a / 2, 0, d / 2);			//C
-	glVertex3f(a / 2, 0, d / 2);			//D
+	glVertex3f(-a / 2, 0, -d / 2);			//A
+	glVertex3f(a / 2, 0, -d / 2);			//B
+	glVertex3f(a / 2, 0, d / 2);			//C
+	glVertex3f(-a / 2, 0, d / 2);			//D
 	//face EFGH
-	glVertex3f(a / 2 - o, h, -d / 2);		//E
-	glVertex3f(a / 2 - o - b, h, -d / 2);	//F
-	glVertex3f(a / 2 - o - b, h, d / 2);	//G
-	glVertex3f(a / 2 - o, h, d / 2);		//H
+	glVertex3f(-a / 2 + o, h, -d / 2);		//E
+	glVertex3f(-a / 2 + o + b, h, -d / 2);	//F
+	glVertex3f(-a / 2 + o + b, h, d / 2);	//G
+	glVertex3f(-a / 2 + o, h, d / 2);		//H
 	//face ABFE
-	glVertex3f(a / 2, 0, -d / 2);			//A
-	glVertex3f(-a / 2, 0, -d / 2);			//B
-	glVertex3f(a / 2 - o - b, h, -d / 2);	//F
-	glVertex3f(a / 2 - o, h, -d / 2);		//E
+	glVertex3f(-a / 2, 0, -d / 2);			//A
+	glVertex3f(a / 2, 0, -d / 2);			//B
+	glVertex3f(-a / 2 + o + b, h, -d / 2);	//F
+	glVertex3f(-a / 2 + o, h, -d / 2);		//E
 	//face BCGF
-	glVertex3f(-a / 2, 0, -d / 2);			//B
-	glVertex3f(-a / 2, 0, d / 2);			//C
-	glVertex3f(a / 2 - o - b, h, d / 2);	//G
-	glVertex3f(a / 2 - o - b, h, -d / 2);	//F
+	glVertex3f(a / 2, 0, -d / 2);			//B
+	glVertex3f(a / 2, 0, d / 2);			//C
+	glVertex3f(-a / 2 + o + b, h, d / 2);	//G
+	glVertex3f(-a / 2 + o + b, h, -d / 2);	//F
 	//face CDHG
-	glVertex3f(-a / 2, 0, d / 2);			//C
-	glVertex3f(a / 2, 0, d / 2);			//D
-	glVertex3f(a / 2 - o, h, d / 2);		//H
-	glVertex3f(a / 2 - o - b, h, d / 2);	//G
+	glVertex3f(a / 2, 0, d / 2);			//C
+	glVertex3f(-a / 2, 0, d / 2);			//D
+	glVertex3f(-a / 2 + o, h, d / 2);		//H
+	glVertex3f(-a / 2 + o + b, h, d / 2);	//G
 	//face DAEH
-	glVertex3f(a / 2, 0, d / 2);			//D
-	glVertex3f(a / 2, 0, -d / 2);			//A
-	glVertex3f(a / 2 - o, h, -d / 2);		//E
-	glVertex3f(a / 2 - o, h, d / 2);		//H
+	glVertex3f(-a / 2, 0, d / 2);			//D
+	glVertex3f(-a / 2, 0, -d / 2);			//A
+	glVertex3f(-a / 2 + o, h, -d / 2);		//E
+	glVertex3f(-a / 2 + o, h, d / 2);		//H
 	glEnd();
+
+	glPopMatrix();
 }
