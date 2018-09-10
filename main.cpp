@@ -1,6 +1,3 @@
-#include "Rectangular.h"
-#include "Trapezoidal.h"
-
 #include <iostream>
 #include <cstdlib>
 #include <cstdio>
@@ -40,6 +37,12 @@
 #include "Messages.hpp"
 #include "HUD.hpp"
 #include "ObstacleManager.hpp"
+
+#include "Rectangular.h"
+#include "Trapezoidal.h"
+#include "Triangular.h"
+#include "Cylinder.h"
+#include "myVehicle.h"
 
 void display();
 void reshape(int width, int height);
@@ -109,7 +112,7 @@ int main(int argc, char ** argv) {
 	//   custom vehicle.
 	// -------------------------------------------------------------------------
 
-	//vehicle = new MyVehicle();
+	vehicle = new myVehicle();
 
 
 	// add test obstacles
@@ -156,14 +159,35 @@ void drawGoals()
 	}
 }
 
-void testDisplay() {
-
-	rectangular rec(5, 5, 5);
+/*void testDisplay() 
+{
+	glTranslated(20, 0, 20);
+	rectangular rec(15, 8, 8);
+	glColor3f(1, 0, 0);
 	rec.draw();
-	trapezoidal tra(10, 5, 3, 5, 1);
+
+	glTranslated(-40, 0, 0);
+	triangular tri(10, 10, 10, 1);
+	glColor3f(0, 1, 0);
+	glRotated(45, 0, 1, 0);
+	tri.draw();
+
+	glRotated(-45, 0, 1, 0);
+	glTranslated(0, 0, -40);
+	trapezoidal tra(10, 5, 5, 8, 3);
+	glColor3f(0, 0, 1);
 	tra.draw();
 
-}
+	glTranslated(40, 0, 0);
+	cylinder cyl(3, 10, 0, 0);
+	glColor3f(1, 1, 1);
+	glRotated(90, 0, 1, 0);
+	cyl.draw();
+
+	glRotated(-90, 0, 1, 0);
+	glTranslated(-20, 0, 20);
+}*/
+
 
 void display() {
 	frameCounter++;
@@ -207,7 +231,11 @@ void display() {
 
 	// draw HUD
 	HUD::Draw();
-	testDisplay();
+
+	//testDisplay();
+	
+
+
 	glutSwapBuffers();
 };
 
@@ -309,13 +337,13 @@ void idle() {
 				otherVehicles.clear();
 
 				// uncomment this line to connect to the robotics server.
-				//RemoteDataManager::Connect("www.robotics.unsw.edu.au","18081");
+			RemoteDataManager::Connect("www.robotics.unsw.edu.au","18081");
 
 				// on connect, let's tell the server what we look like
 				if (RemoteDataManager::IsConnected()) {
 					ObstacleManager::get()->removeAll();
 
-					VehicleModel vm;
+					VehicleModel vm = ((myVehicle*)vehicle)->setLocal(); //upload my vehicle
 					vm.remoteID = 0;
 
 					//
@@ -356,11 +384,9 @@ void idle() {
 								VehicleModel vm = models[i];
 								
 								// uncomment the line below to create remote vehicles
-								//otherVehicles[vm.remoteID] = new MyVehicle();
-
-								//
-								// more student code goes here
-								//
+							
+								otherVehicles[vm.remoteID] = new myVehicle(vm);
+								
 							}
 							break;
 						}

@@ -41,7 +41,7 @@
 #include "ObstacleManager.hpp"
 
 trapezoidal::trapezoidal() {}
-trapezoidal::trapezoidal(double aLength, double bLength, double height, double depth, double offset, double red, double green, double blue, double xPosition, double yPosition, double zPosition)
+trapezoidal::trapezoidal(double aLength, double bLength, double height, double depth, double offset, double red, double green, double blue, double xPosition, double yPosition, double zPosition, double rotation)
 {
 	this->a = aLength;
 	this->b = bLength;
@@ -54,6 +54,7 @@ trapezoidal::trapezoidal(double aLength, double bLength, double height, double d
 	this->xP = xPosition;
 	this->yP = yPosition;
 	this->zP = zPosition;
+	this->rt = rotation;
 }
 
 void trapezoidal::draw()
@@ -61,6 +62,7 @@ void trapezoidal::draw()
 	glPushMatrix();
 	glTranslated(xP, yP, zP);
 	glColor3f(r, g, bb);
+	glRotated(rt, 0, 0, 1);
 
 	glBegin(GL_QUADS);
 	//face ABCD

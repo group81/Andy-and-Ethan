@@ -47,18 +47,101 @@
 
 myVehicle::myVehicle()
 {
-	//implement the how to convert local vehicle into structure for uploading to the server
+	myVehicleModel();
+	for (std::vector<ShapeInit>::iterator it = local.shapes.begin(); it != local.shapes.end(); ++it)
+	{
+		if (it->type == RECTANGULAR_PRISM)
+		{
+			rectangular* rec = NULL;
+			rec = new rectangular(it->params.rect.xlen, it->params.rect.ylen, it->params.rect.zlen, it->rgb[0], it->rgb[1], it->rgb[2], it->xyz[0], it->xyz[1], it->xyz[2]);
+			addShape(rec);
+		}
+
+		else if (it->type == TRIANGULAR_PRISM)
+		{
+			triangular * tri = NULL;
+			tri = new triangular(it->params.tri.alen, it->params.tri.blen, it->params.tri.depth, it->params.tri.angle, it->rgb[0], it->rgb[1], it->rgb[2], it->xyz[0], it->xyz[1], it->xyz[2]);
+			addShape(tri);
+		}
+
+		else if (it->type == TRAPEZOIDAL_PRISM)
+		{
+			trapezoidal * tra = NULL;
+			tra = new trapezoidal(it->params.trap.alen, it->params.trap.blen, it->params.trap.height, it->params.trap.depth, it->params.trap.aoff, it->rgb[0], it->rgb[1], it->rgb[2], it->xyz[0], it->xyz[1], it->xyz[2], it->rotation);
+			addShape(tra);
+		}
+
+		else if (it->type == CYLINDER)
+		{
+			cylinder * cyl = NULL;
+			cyl = new cylinder(it->params.cyl.radius, it->params.cyl.depth, it->params.cyl.isSteering, it->params.cyl.isRolling, it->rgb[0], it->rgb[1], it->rgb[2], it->xyz[0], it->xyz[1], it->xyz[2], it->rotation);
+			addShape(cyl);
+		}
+		
+	}
+
 }
 
 myVehicle::myVehicle(VehicleModel remote)
 {
-	//How to convert the remote vehicle downloading from the server
+	myVehicleModel();
+	for (std::vector<ShapeInit>::iterator it = remote.shapes.begin(); it != remote.shapes.end(); ++it) 
+	{
+		if (it->type == RECTANGULAR_PRISM) 
+		{
+			rectangular* rec = NULL;
+			rec = new rectangular(it->params.rect.xlen, it->params.rect.ylen, it->params.rect.zlen, it->rgb[0], it->rgb[1], it->rgb[2], it->xyz[0], it->xyz[1], it->xyz[2]);
+			addShape(rec);
+		}
+
+		else if (it->type == TRIANGULAR_PRISM)
+		{
+			triangular * tri = NULL;
+			tri = new triangular(it->params.tri.alen, it->params.tri.blen, it->params.tri.depth, it->params.tri.angle, it->rgb[0], it->rgb[1], it->rgb[2], it->xyz[0], it->xyz[1], it->xyz[2]);
+			addShape(tri);
+		}
+
+		else if (it->type == TRAPEZOIDAL_PRISM)
+		{
+			trapezoidal * tra = NULL;
+			tra = new trapezoidal(it->params.trap.alen, it->params.trap.blen, it->params.trap.height, it->params.trap.depth, it->params.trap.aoff, it->rgb[0], it->rgb[1], it->rgb[2], it->xyz[0], it->xyz[1], it->xyz[2], it->rotation);
+			addShape(tra);
+		}
+
+		else if (it->type == CYLINDER) 
+		{
+			cylinder * cyl = NULL;
+			cyl = new cylinder(it->params.cyl.radius, it->params.cyl.depth, it->params.cyl.isSteering, it->params.cyl.isRolling, it->rgb[0], it->rgb[1], it->rgb[2], it->xyz[0], it->xyz[1], it->xyz[2], it->rotation);
+			addShape(cyl);
+		}
+	
+	} 
 }
 
 
 void myVehicle::draw()
 {
-	//Draw local and remote car
+	cylinder* ptr = NULL;
+	for (std::vector<Shape*>::iterator it = shapes.begin(); it != shapes.end(); ++it)
+	{
+		glPushMatrix();
+		positionInGL();
+
+		ptr = dynamic_cast <cylinder*>(*it);
+		if (ptr != NULL)
+		{
+			ptr->checkRolling(speed);
+			ptr->setRolling(speed);
+			if (ptr->getSteering())
+			{
+				ptr->setRotate(steering);
+			}
+		}
+
+		(*it)->draw();
+		glPopMatrix();
+
+	}
 }
 
 void myVehicle::myVehicleModel()

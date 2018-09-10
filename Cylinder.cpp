@@ -42,7 +42,7 @@
 
 cylinder::cylinder() {}
 
-cylinder::cylinder(double radius, double depth, bool isSteeling, bool isRolling, double red, double green, double blue, double xPosition, double yPosition, double zPosition)
+cylinder::cylinder(double radius, double depth, bool isSteeling, bool isRolling, double red, double green, double blue, double xPosition, double yPosition, double zPosition, double rotation)
 {
 	this->r = radius;
 	this->d = depth;
@@ -54,10 +54,14 @@ cylinder::cylinder(double radius, double depth, bool isSteeling, bool isRolling,
 	this->xP = xPosition;
 	this->yP = yPosition;
 	this->zP = zPosition;
+	this->rt = rotation;
+
+
 }
 
 void cylinder::draw()
 {
+	static double rollspd = rollingSpeed;
 	GLUquadric * quads = gluNewQuadric();
 
 	glPushMatrix();
@@ -67,7 +71,18 @@ void cylinder::draw()
 	glRotated(-rt, 0, 1, 0);
 
 	glTranslated(0, r , -d / 2);
-
+	
+	if (roll == 1)
+	{
+		if (checkRoll == 0)
+		{
+			glRotated(0, 0, 0, 1);
+		}
+		else if (checkRoll == 1) {
+			glRotated(-rollspd/10, 0, 0, 1);
+		}
+		else glRotated(rollspd/10, 0, 0, 1);
+	}
 	gluCylinder(quads, r, r, d, 6, 1);
 	gluDisk(quads, 0, r, 6, 1);
 
@@ -75,4 +90,35 @@ void cylinder::draw()
 	gluDisk(quads, 0, r, 6, 1);
 
 	glPopMatrix();
+	rollspd += 1;
+	
+}
+
+
+void cylinder::checkRolling(double speed)
+{
+	if (speed > 0) {
+		checkRoll = 1;
+	}
+	else if (speed < 0) {
+		checkRoll = -1;
+	}
+	else checkRoll = 0;
+
+}
+
+
+void cylinder::setRolling(double speed)
+{
+	rollingSpeed = speed;
+}
+
+bool cylinder::getSteering()
+{
+	return steel;
+}
+
+void cylinder::setRotate(double steering)
+{
+	rt = steering;
 }
