@@ -53,14 +53,14 @@ myVehicle::myVehicle()
 		if (it->type == RECTANGULAR_PRISM)
 		{
 			rectangular* rec = NULL;
-			rec = new rectangular(it->params.rect.xlen, it->params.rect.ylen, it->params.rect.zlen, it->rgb[0], it->rgb[1], it->rgb[2], it->xyz[0], it->xyz[1], it->xyz[2]);
+			rec = new rectangular(it->params.rect.xlen, it->params.rect.ylen, it->params.rect.zlen, it->rgb[0], it->rgb[1], it->rgb[2], it->xyz[0], it->xyz[1], it->xyz[2], it->rotation);
 			addShape(rec);
 		}
 
 		else if (it->type == TRIANGULAR_PRISM)
 		{
 			triangular * tri = NULL;
-			tri = new triangular(it->params.tri.alen, it->params.tri.blen, it->params.tri.depth, it->params.tri.angle, it->rgb[0], it->rgb[1], it->rgb[2], it->xyz[0], it->xyz[1], it->xyz[2]);
+			tri = new triangular(it->params.tri.alen, it->params.tri.blen, it->params.tri.depth, it->params.tri.angle, it->rgb[0], it->rgb[1], it->rgb[2], it->xyz[0], it->xyz[1], it->xyz[2], it->rotation);
 			addShape(tri);
 		}
 
@@ -90,14 +90,14 @@ myVehicle::myVehicle(VehicleModel remote)
 		if (it->type == RECTANGULAR_PRISM) 
 		{
 			rectangular* rec = NULL;
-			rec = new rectangular(it->params.rect.xlen, it->params.rect.ylen, it->params.rect.zlen, it->rgb[0], it->rgb[1], it->rgb[2], it->xyz[0], it->xyz[1], it->xyz[2]);
+			rec = new rectangular(it->params.rect.xlen, it->params.rect.ylen, it->params.rect.zlen, it->rgb[0], it->rgb[1], it->rgb[2], it->xyz[0], it->xyz[1], it->xyz[2], it->rotation);
 			addShape(rec);
 		}
-
+		
 		else if (it->type == TRIANGULAR_PRISM)
 		{
 			triangular * tri = NULL;
-			tri = new triangular(it->params.tri.alen, it->params.tri.blen, it->params.tri.depth, it->params.tri.angle, it->rgb[0], it->rgb[1], it->rgb[2], it->xyz[0], it->xyz[1], it->xyz[2]);
+			tri = new triangular(it->params.tri.alen, it->params.tri.blen, it->params.tri.depth, it->params.tri.angle, it->rgb[0], it->rgb[1], it->rgb[2], it->xyz[0], it->xyz[1], it->xyz[2], it->rotation);
 			addShape(tri);
 		}
 

@@ -41,7 +41,7 @@
 
 rectangular::rectangular(){}
 
-rectangular::rectangular(double x, double y, double z, double red, double green, double blue, double xPosition, double yPosition, double zPosition) {
+rectangular::rectangular(double x, double y, double z, double red, double green, double blue, double xPosition, double yPosition, double zPosition, double rotation) {
 	this->xx = x;
 	this->yy = y;
 	this->zz = z;
@@ -51,6 +51,7 @@ rectangular::rectangular(double x, double y, double z, double red, double green,
 	this->xP = xPosition;
 	this->yP = yPosition;
 	this->zP = zPosition;
+	this->rt = rotation;
 }
 
 void rectangular::draw() {
@@ -58,38 +59,39 @@ void rectangular::draw() {
 	glPushMatrix();
 	glTranslated(xP, yP, zP);
 	glColor3f(r, g, b);
+	glRotated(rt, 0, 1, 0);
 
 	glBegin(GL_QUADS);
 	//face ABCD
-	glVertex3f(xx / 2, 0, -zz / 2);			//A
-	glVertex3f(-xx / 2, 0, -zz / 2);		//B
-	glVertex3f(-xx / 2, 0, zz / 2);			//C
-	glVertex3f(xx / 2, 0, zz / 2);			//D
+	glVertex3f(-xx / 2, 0, -zz / 2);			//A
+	glVertex3f(xx / 2, 0, -zz / 2);		//B
+	glVertex3f(xx / 2, 0, zz / 2);			//C
+	glVertex3f(-xx / 2, 0, zz / 2);			//D
 	//face EFHG
-	glVertex3f(xx / 2, yy, -zz / 2);		//E
-	glVertex3f(-xx / 2, yy, -zz / 2);		//F
-	glVertex3f(-xx / 2, yy, zz / 2);		//G
-	glVertex3f(xx / 2, yy, zz / 2);			//H
+	glVertex3f(-xx / 2, yy, -zz / 2);		//E
+	glVertex3f(xx / 2, yy, -zz / 2);		//F
+	glVertex3f(xx / 2, yy, zz / 2);		//G
+	glVertex3f(-xx / 2, yy, zz / 2);			//H
 	//face ABFE
-	glVertex3f(xx / 2, 0, -zz / 2);			//A
-	glVertex3f(-xx / 2, 0, -zz / 2);		//B
-	glVertex3f(-xx / 2, yy, -zz / 2);		//F
-	glVertex3f(xx / 2, yy, -zz / 2);		//E
+	glVertex3f(-xx / 2, 0, -zz / 2);			//A
+	glVertex3f(xx / 2, 0, -zz / 2);		//B
+	glVertex3f(xx / 2, yy, -zz / 2);		//F
+	glVertex3f(-xx / 2, yy, -zz / 2);		//E
 	//BCGF
-	glVertex3f(-xx / 2, 0, -zz / 2);		//B
-	glVertex3f(-xx / 2, 0, zz / 2);			//C
-	glVertex3f(-xx / 2, yy, zz / 2);		//G
-	glVertex3f(-xx / 2, yy, -zz / 2);		//F
+	glVertex3f(xx / 2, 0, -zz / 2);		//B
+	glVertex3f(xx / 2, 0, zz / 2);			//C
+	glVertex3f(xx / 2, yy, zz / 2);		//G
+	glVertex3f(xx / 2, yy, -zz / 2);		//F
 	//CDHG
-	glVertex3f(-xx / 2, 0, zz / 2);			//C
-	glVertex3f(xx / 2, 0, zz / 2);			//D
-	glVertex3f(xx / 2, yy, zz / 2);			//H
-	glVertex3f(-xx / 2, yy, zz / 2);		//G
+	glVertex3f(xx / 2, 0, zz / 2);			//C
+	glVertex3f(-xx / 2, 0, zz / 2);			//D
+	glVertex3f(-xx / 2, yy, zz / 2);			//H
+	glVertex3f(xx / 2, yy, zz / 2);		//G
 	//DAEH
-	glVertex3f(xx / 2, 0, zz / 2);			//D
-	glVertex3f(xx / 2, 0, -zz / 2);			//A
-	glVertex3f(xx / 2, yy, -zz / 2);		//E
-	glVertex3f(xx / 2, yy, zz / 2);			//H
+	glVertex3f(-xx / 2, 0, zz / 2);			//D
+	glVertex3f(-xx / 2, 0, -zz / 2);			//A
+	glVertex3f(-xx / 2, yy, -zz / 2);		//E
+	glVertex3f(-xx / 2, yy, zz / 2);			//H
 	glEnd();
 
 	glPopMatrix();

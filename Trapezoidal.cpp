@@ -62,7 +62,7 @@ void trapezoidal::draw()
 	glPushMatrix();
 	glTranslated(xP, yP, zP);
 	glColor3f(r, g, bb);
-	glRotated(rt, 0, 0, 1);
+	glRotated(rt, 0, 1, 0);
 
 	glBegin(GL_QUADS);
 	//face ABCD
